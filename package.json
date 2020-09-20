@@ -1,0 +1,79 @@
+{
+	"name": "genymotion",
+	"displayName": "Genymotion",
+	"publisher": "Behrad",
+	"description": "An official extension for managing Genymotion devices.",
+	"icon": "resources/ic_genymotion.png",
+	"version": "1.1.0",
+	"engines": {
+		"vscode": "^1.44.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:genymotion.setting",
+		"onCommand:genymotion.start",
+		"onCommand:genymotion.open"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"title": "Genymotion: Setting",
+				"icon": "$(settings-gear)",
+				"command": "genymotion.setting"
+			},
+			{
+				"title": "Genymotion: Start device",
+				"icon": "$(vm)",
+				"command": "genymotion.start"
+			},
+			{
+				"title": "Genymotion: Open Genymotion",
+				"icon": "$(vm)",
+				"command": "genymotion.open"
+			}
+		],
+		"configuration": {
+			"title": "Genymotion",
+			"properties": {
+				"genymotion.genymotion.installedPath": {
+					"type": "string",
+					"scope": "application",
+					"markdownDescription": "Specifies where is `Genymotion` installed folder. If you installed it on default folder, leade blank this field. **For example: `\"C:\\Program Files\\Genymobile\\Genymotion\"`**"
+				},
+				"genymotion.virtualBox.installedPath": {
+					"type": "string",
+					"scope": "application",
+					"markdownDescription": "Specifies where is `Vrtual Box` installed folder. If you installed it on default folder, leade blank this field. **For example: `\"C:\\Program Files\\Oracle\\VirtualBox\"`**"
+					
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.44.0",
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^13.11.0",
+		"eslint": "^6.8.0",
+		"@typescript-eslint/parser": "^2.26.0",
+		"@typescript-eslint/eslint-plugin": "^2.26.0",
+		"glob": "^7.1.6",
+		"mocha": "^7.1.1",
+		"typescript": "^3.8.3",
+		"vscode-test": "^1.3.0"
+	},
+	"dependencies": {
+		"system-commands": "^1.1.7"
+	}
+}
