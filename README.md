@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-    <img src="https://github.com/abehrad-ir/genymotion-vscode/resources/images/genymotion-logo.png/ic_genymotion.png?raw=true" alt="logo" width="200">
+    <img src="https://github.com/abehrad-ir/genymotion-vscode/blob/master/resources/ic_genymotion.png?raw=true" alt="logo" width="200">
   <br>
   VS Code - Genymotion Device Manager
   <br>
@@ -11,7 +11,7 @@
 
 
 
-![Demo](https://github.com/abehrad-ir/genymotion-vscode/resources/watchme.gif?raw=true)
+![Demo](https://github.com/abehrad-ir/genymotion-vscode/blob/master/resources/watchme.gif?raw=true)
 
 **Supported features**
 * View and run Genymotion devices
