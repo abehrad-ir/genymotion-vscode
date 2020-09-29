@@ -84,7 +84,7 @@ export class DeviceManager {
     }
 
     startDevice(uuid: string) {
-        spawn(this.playerName(), ["--vm-name", uuid], {
+        spawn(Utils.isWin() ? this.playerName() : "./" + this.playerName(), ["--vm-name", uuid], {
             cwd: this.genyPath,
             stdio: 'ignore',
             detached: true
