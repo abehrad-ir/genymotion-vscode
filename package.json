@@ -1,10 +1,14 @@
 {
 	"name": "genymotion",
 	"displayName": "Genymotion",
-	"publisher": "Behrad",
+	"publisher": "ABehrad",
 	"description": "An official extension for managing Genymotion devices.",
 	"icon": "resources/ic_genymotion.png",
 	"version": "1.1.0",
+	"license": "SEE LICENSE IN LICENSE.txt",
+	"author": {
+		"name": "ABehrad"
+	},
 	"engines": {
 		"vscode": "^1.44.0"
 	},
@@ -47,7 +51,6 @@
 					"type": "string",
 					"scope": "application",
 					"markdownDescription": "Specifies where is `Vrtual Box` installed folder. If you installed it on default folder, leade blank this field. **For example: `\"C:\\Program Files\\Oracle\\VirtualBox\"`**"
-					
 				}
 			}
 		}
@@ -75,5 +78,14 @@
 	},
 	"dependencies": {
 		"system-commands": "^1.1.7"
-	}
+	},
+	"bugs": {
+		"url": "https://github.com/abehrad-ir/genymotion-vscode/issues",
+		"email": "abehrad.ir@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/abehrad-ir/genymotion-vscode.git"
+	},
+	  "homepage": "https://github.com/abehrad-ir/genymotion-vscode/blob/master/README.md"
 }

@@ -96,7 +96,7 @@ export class DeviceManager {
         let result = spawnSync(this.vBoxManageName(), ["list", "vms"], {
             cwd: this.vboxPath,
         }).stdout.toString();
-        let devices = result.split("\r\n");
+        let devices = result.split("\n");
         devices.pop();
         for (let device of devices) {
             let name = device.substring(1, device.lastIndexOf('"'));
