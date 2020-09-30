@@ -246,7 +246,7 @@ function commandSetting() {
 function commandOpen() {
 	readConfigurations();
 	if (genyPath) {
-		spawn(Utils.isWin() ? "genymotion.exe" : "genymotion", {
+		spawn(PathHelper.genymotionPath(genyPath), {
 			cwd: genyPath
 		});
 	}
