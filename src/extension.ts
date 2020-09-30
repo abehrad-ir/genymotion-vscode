@@ -195,12 +195,13 @@ function commandSetting() {
 	}).then( item => {
 		if (item) {
 			let isGenymotion = item.isGenymotion;
+			let pathIsFolder = !Utils.isMac();
 
 			if (isGenymotion) {
 				vscode.window.showOpenDialog(
 					{
-						canSelectFiles: false,
-						canSelectFolders: true,
+						canSelectFiles: !pathIsFolder,
+						canSelectFolders: pathIsFolder,
 						canSelectMany: false,
 						openLabel: "Genymotion Path...",
 					},
@@ -219,8 +220,8 @@ function commandSetting() {
 			} else {
 				vscode.window.showOpenDialog(
 					{
-						canSelectFiles: false,
-						canSelectFolders: true,
+						canSelectFiles: !pathIsFolder,
+						canSelectFolders: pathIsFolder,
 						canSelectMany: false,
 						openLabel: "VirtualBox Path...",
 					},
