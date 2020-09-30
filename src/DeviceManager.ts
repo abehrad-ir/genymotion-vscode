@@ -3,6 +3,7 @@ import './Utils';
 import * as fs from 'fs';
 import { spawnSync, spawn } from 'child_process';
 import { Utils } from './Utils';
+import { PathHelper } from './PathHelper';
 
 interface DevicesList {
     name: string;
@@ -25,10 +26,6 @@ export class DeviceManager {
 
     private vBoxManageName(): string {
         return Utils.isWin() ? "VBoxManage.exe" : "VBoxManage";
-    }
-
-    private playerName(): string {
-        return Utils.isWin() ? "player.exe" : "player";
     }
 
     private isGenymotionDevice(uuid: string): boolean {
@@ -84,7 +81,7 @@ export class DeviceManager {
     }
 
     startDevice(uuid: string) {
-        spawn(Utils.isWin() ? this.playerName() : "./" + this.playerName(), ["--vm-name", uuid], {
+        spawn(PathHelper.playerPath(this.genyPath), ["--vm-name", uuid], {
             cwd: this.genyPath,
             stdio: 'ignore',
             detached: true

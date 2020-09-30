@@ -33,6 +33,52 @@ function readConfigurations() {
 	vboxPath = vscode.workspace.getConfiguration("genymotion").get(VIRTUALBOX_FOLDER_CONF, "");
 }
 
+function selectGenymotionPath() {
+	let pathIsFolder = !Utils.isMac();
+
+	vscode.window.showOpenDialog(
+		{
+			canSelectFiles: !pathIsFolder,
+			canSelectFolders: pathIsFolder,
+			canSelectMany: false,
+			openLabel: "Genymotion Path...",
+		},
+	).then( async fileUri => {
+		if (fileUri && fileUri[0]) {
+			vscode.workspace.getConfiguration("genymotion").update(GENYMOTION_FOLDER_CONF, fileUri[0].fsPath, true).then(par => {
+				if (PathHelper.verifyGenyPath(fileUri[0].fsPath)) {
+					vscode.window.showInformationMessage("`Genymotion` path was detected succesfully.");
+				} else {
+					vscode.window.showErrorMessage("The detected path for `Genymotion` is not correct.");
+				}
+			});
+		}
+	});
+}
+
+function selectVirtualBoxPath() {
+	let pathIsFolder = !Utils.isMac();
+	vscode.window.showOpenDialog(
+		{
+			canSelectFiles: !pathIsFolder,
+			canSelectFolders: pathIsFolder,
+			canSelectMany: false,
+			openLabel: "VirtualBox Path...",
+		},
+	).then( async fileUri => {
+		if (fileUri && fileUri[0]) {
+			vscode.workspace.getConfiguration("genymotion").update(VIRTUALBOX_FOLDER_CONF, fileUri[0].fsPath, true).then(par => {
+				if (PathHelper.verifyVBoxPath(fileUri[0].fsPath)) {
+					vscode.window.showInformationMessage("`VirtualBox` path was detected succesfully.");
+				} else {
+					vscode.window.showErrorMessage("The detected path for `Virtual Box` is not correct.");
+				}
+			});
+
+		}
+	});
+}
+
 function detectePathes(): boolean {
 	
 	let statusItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
@@ -60,27 +106,7 @@ function detectePathes(): boolean {
 		).then(choice => {
 			// OnDetecte Selected
 			if (choice === "Detecte Path") {
-				vscode.window.showOpenDialog(
-					{
-						canSelectFiles: false,
-						canSelectFolders: true,
-						canSelectMany: false,
-						openLabel: "Genymotion Path...",
-					},
-				).then( async fileUri => {
-					if (fileUri && fileUri[0]) {
-						vscode.workspace.getConfiguration("genymotion").update(GENYMOTION_FOLDER_CONF, fileUri[0].fsPath, true).then(par => {
-							if (PathHelper.verifyGenyPath(fileUri[0].fsPath)) {
-								vscode.window.showInformationMessage("`Genymotion` path was detected succesfully.");
-							} else {
-								vscode.window.showErrorMessage("The detected path for `Genymotion` is not correct.");
-							}
-						});
-						
-					} else  {
-						vscode.window.showWarningMessage("Please detecte `Genymotion` path in setting.");
-					}
-				});
+				selectGenymotionPath();
 			}
 		});
 	}
@@ -93,27 +119,7 @@ function detectePathes(): boolean {
 			"Can't detecte `VirtualBox` Path. Detecte it here or Go to settings and Genymotion session.", ...["Detecte Path", "Dismise"]
 		).then(choice => {
 			if (choice === "Detecte Path") {
-				vscode.window.showOpenDialog(
-					{
-						canSelectFiles: false,
-						canSelectFolders: true,
-						canSelectMany: false,
-						openLabel: "VirtualBox Path...",
-					},
-				).then( async fileUri => {
-					if (fileUri && fileUri[0]) {
-						vscode.workspace.getConfiguration("genymotion").update(VIRTUALBOX_FOLDER_CONF, fileUri[0].fsPath, true).then(par => {
-							if (PathHelper.verifyVBoxPath(fileUri[0].fsPath)) {
-								vscode.window.showInformationMessage("`VirtualBox` path was detected succesfully.");
-							} else {
-								vscode.window.showErrorMessage("The detected path for `Virtual Box` is not correct.");
-							}
-						});
-							
-					} else  {
-						vscode.window.showWarningMessage("Please detecte `VirtualBox` path in setting.");
-					}
-				});
+				selectVirtualBoxPath();
 			}
 		});
 	}
@@ -171,7 +177,6 @@ function commandStart() {
 	return;
 }
 
-
 function commandSetting() {
 	readConfigurations();
 	let items = [
@@ -194,48 +199,10 @@ function commandSetting() {
 		ignoreFocusOut: false,
 	}).then( item => {
 		if (item) {
-			let isGenymotion = item.isGenymotion;
-
-			if (isGenymotion) {
-				vscode.window.showOpenDialog(
-					{
-						canSelectFiles: false,
-						canSelectFolders: true,
-						canSelectMany: false,
-						openLabel: "Genymotion Path...",
-					},
-				).then( async fileUri => {
-					if (fileUri && fileUri[0]) {
-						vscode.workspace.getConfiguration("genymotion").update(GENYMOTION_FOLDER_CONF, fileUri[0].fsPath, true).then(par => {
-							if (PathHelper.verifyGenyPath(fileUri[0].fsPath)) {
-								vscode.window.showInformationMessage("`Genymotion` path was detected succesfully.");
-							} else {
-								vscode.window.showErrorMessage("The detected path for `Genymotion` is not correct.");
-							}
-						});
-					}
-				});
-
+			if (item.isGenymotion) {
+				selectGenymotionPath();
 			} else {
-				vscode.window.showOpenDialog(
-					{
-						canSelectFiles: false,
-						canSelectFolders: true,
-						canSelectMany: false,
-						openLabel: "VirtualBox Path...",
-					},
-				).then( async fileUri => {
-					if (fileUri && fileUri[0]) {
-						vscode.workspace.getConfiguration("genymotion").update(VIRTUALBOX_FOLDER_CONF, fileUri[0].fsPath, true).then(par => {
-							if (PathHelper.verifyVBoxPath(fileUri[0].fsPath)) {
-								vscode.window.showInformationMessage("`VirtualBox` path was detected succesfully.");
-							} else {
-								vscode.window.showErrorMessage("The detected path for `Virtual Box` is not correct.");
-							}
-						});
-							
-					}
-				});
+				selectVirtualBoxPath();
 			}
 			
 		}
@@ -245,7 +212,7 @@ function commandSetting() {
 function commandOpen() {
 	readConfigurations();
 	if (genyPath) {
-		spawn(Utils.isWin() ? "genymotion.exe" : "genymotion", {
+		spawn(PathHelper.genymotionPath(genyPath), {
 			cwd: genyPath
 		});
 	}

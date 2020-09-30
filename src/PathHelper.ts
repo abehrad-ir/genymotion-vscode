@@ -63,18 +63,28 @@ export class PathHelper {
         if (!path || path === "") {
             return false;
         } else {
-            if (Utils.isMac()) {
-                path += separator + "Contents" + separator + "MacOS" + separator
-                    + "player.app" + separator + "Contents" + separator + "MacOS";
-            }
-
-            path = path.slice(-1) === "/" || path.slice(-1) === "\\" ? path : path + separator;
-            path += Utils.isWin() ? "player.exe" : "player";
-            if (fs.existsSync(path)) {
+            if (fs.existsSync(PathHelper.playerPath(path))) {
                 return true;
             }
         }
         return false;
+    }
+
+    static genymotionPath(genyPath: string): string {
+        if (Utils.isMac()) {
+            genyPath += separator + "Contents" + separator + "MacOS";
+        }
+        genyPath += separator + (Utils.isWin() ? "genymotion.exe" : "genymotion");
+        return genyPath;
+    }
+
+    static playerPath(genyPath: string): string {
+        if (Utils.isMac()) {
+            genyPath += separator + "Contents" + separator + "MacOS" + separator
+                + "player.app" + separator + "Contents" + separator + "MacOS";
+        }
+        genyPath += separator + (Utils.isWin() ? "player.exe" : "player");
+        return genyPath;
     }
 
     static verifyVBoxPath(path: string): boolean {
@@ -82,8 +92,7 @@ export class PathHelper {
             return false;
         } else {
             if (Utils.isMac()) {
-                path += separator + "Contents" + separator + "MacOS" + separator
-                    + "VBoxManage.app" + separator + "Contents" + separator + "MacOS";
+                path += separator + "Contents" + separator + "MacOS";
             }
 
             path = path.slice(-1) === "/" || path.slice(-1) === "\\" ? path : path + separator;
