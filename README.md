@@ -15,12 +15,12 @@
 
 **Supported features**
 * View and run Genymotion devices
-* Open Genymotioin from vscode
-* Custome Genymotion and VirtualBox path
+* Open Genymotion from vscode
+* Customize Genymotion and VirtualBox paths
 
 ## Getting Started
 1. [Install the extension](https://marketplace.visualstudio.com/items?itemName=Behrad.genymotion)
-2. Run Genymotion sertting from command pallet and detecte Genymotion and VirtualBox path.
-3. Run Genymotion devices command from command pallet and choise your Genymotion devices to start.
+2. Run `Genymotion: Setting` command from *Command pallet* and specify Genymotion and VirtualBox path.
+3. Run `Genymotion: Start device` command from *Command pallet* and select your Genymotion device(s) to start.
 
-> **`Tip`**`:` It doesn't need to detecte  Genymotion and VirtualBox path if you installed them in default path.
+> **`Tip`**`:` It is not necessary to specify Genymotion and VirtualBox paths if you installed them in default path.
