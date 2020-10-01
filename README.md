@@ -20,7 +20,7 @@
 ## Getting Started
 
 1. [Install the extension](https://marketplace.visualstudio.com/items?itemName=Behrad.genymotion)
-2. Run `Genymotion: Setting` command from *Command pallette* and specify Genymotion and VirtualBox path.
-3. Run `Genymotion: Start device` command from *Command pallette* and select your Genymotion device(s) to start.
+2. Run `Genymotion: Setting` command from *Command palette* and specify Genymotion and VirtualBox path.
+3. Run `Genymotion: Start device` command from *Command palette* and select your Genymotion device(s) to start.
 
 > **`Tip`**`:` It is not necessary to specify Genymotion and VirtualBox paths if you installed them in default path.
