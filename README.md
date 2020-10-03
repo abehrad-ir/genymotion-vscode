@@ -24,3 +24,6 @@
 3. Run `Genymotion: Start device` command from *Command palette* and select your Genymotion device(s) to start.
 
 > **`Tip`**`:` It is not necessary to specify Genymotion and VirtualBox paths if you installed them in default path.
+
+--- 
+This extension was developed by a partner with support from Genymobile.
