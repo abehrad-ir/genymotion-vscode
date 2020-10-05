@@ -102,7 +102,7 @@ function detectePathes(): boolean {
 	if (geny === false) {
 		// Show error notification when detecting Genymotion path
 		vscode.window.showErrorMessage(
-			"Can't detect Genymotion path.\n Input it here or Go to settings and Genymotion session.", ...["Set Path", "Cancel"]
+			"Can't detect Genymotion path.\n Verify Genymotion installation or set the path manually.", ...["Set Path", "Cancel"]
 		).then(choice => {
 			// OnDetecte Selected
 			if (choice === "Set Path") {
@@ -116,7 +116,7 @@ function detectePathes(): boolean {
 	if (vbox === false) {
 		// Shwo error notification when detecting Vbox path
 		vscode.window.showErrorMessage(
-			"Can't detect VirtualBox path.\n Input it here or Go to settings and Genymotion session.", ...["Set Path", "Cancel"]
+			"Can't detect VirtualBox path.\n Verify VirtualBox installation or set the path manually.", ...["Set Path", "Cancel"]
 		).then(choice => {
 			if (choice === "Set Path") {
 				selectVirtualBoxPath();
