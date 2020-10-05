@@ -24,12 +24,12 @@
 	"contributes": {
 		"commands": [
 			{
-				"title": "Genymotion: Setting",
+				"title": "Genymotion: Settings",
 				"icon": "$(settings-gear)",
 				"command": "genymotion.setting"
 			},
 			{
-				"title": "Genymotion: Start device",
+				"title": "Genymotion: Start device(s)",
 				"icon": "$(vm)",
 				"command": "genymotion.start"
 			},
