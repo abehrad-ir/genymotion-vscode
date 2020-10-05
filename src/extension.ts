@@ -47,9 +47,9 @@ function selectGenymotionPath() {
 		if (fileUri && fileUri[0]) {
 			vscode.workspace.getConfiguration("genymotion").update(GENYMOTION_FOLDER_CONF, fileUri[0].fsPath, true).then(par => {
 				if (PathHelper.verifyGenyPath(fileUri[0].fsPath)) {
-					vscode.window.showInformationMessage("`Genymotion` path has been successfully detected.");
+					vscode.window.showInformationMessage("Genymotion path has been successfully detected.");
 				} else {
-					vscode.window.showErrorMessage("`Genymotion` path could not be detected or path is not valid.");
+					vscode.window.showErrorMessage("Genymotion path could not be detected or path is not valid.");
 				}
 			});
 		}
@@ -69,9 +69,9 @@ function selectVirtualBoxPath() {
 		if (fileUri && fileUri[0]) {
 			vscode.workspace.getConfiguration("genymotion").update(VIRTUALBOX_FOLDER_CONF, fileUri[0].fsPath, true).then(par => {
 				if (PathHelper.verifyVBoxPath(fileUri[0].fsPath)) {
-					vscode.window.showInformationMessage("`VirtualBox` path has been successfully detected.");
+					vscode.window.showInformationMessage("VirtualBox path has been successfully detected.");
 				} else {
-					vscode.window.showErrorMessage("`VirtualBox` path could not be detected or path is not valid.");
+					vscode.window.showErrorMessage("VirtualBox path could not be detected or path is not valid.");
 				}
 			});
 
@@ -102,7 +102,7 @@ function detectePathes(): boolean {
 	if (geny === false) {
 		// Show error notification when detecting Genymotion path
 		vscode.window.showErrorMessage(
-			"Can't detect `Genymotion` path.\n Input it here or Go to settings and Genymotion session.", ...["Set Path", "Cancel"]
+			"Can't detect Genymotion path.\n Input it here or Go to settings and Genymotion session.", ...["Set Path", "Cancel"]
 		).then(choice => {
 			// OnDetecte Selected
 			if (choice === "Set Path") {
@@ -116,7 +116,7 @@ function detectePathes(): boolean {
 	if (vbox === false) {
 		// Shwo error notification when detecting Vbox path
 		vscode.window.showErrorMessage(
-			"Can't detect `VirtualBox` path.\n Input it here or Go to settings and Genymotion session.", ...["Set Path", "Cancel"]
+			"Can't detect VirtualBox path.\n Input it here or Go to settings and Genymotion session.", ...["Set Path", "Cancel"]
 		).then(choice => {
 			if (choice === "Set Path") {
 				selectVirtualBoxPath();
