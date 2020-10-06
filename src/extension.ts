@@ -47,9 +47,9 @@ function selectGenymotionPath() {
 		if (fileUri && fileUri[0]) {
 			vscode.workspace.getConfiguration("genymotion").update(GENYMOTION_FOLDER_CONF, fileUri[0].fsPath, true).then(par => {
 				if (PathHelper.verifyGenyPath(fileUri[0].fsPath)) {
-					vscode.window.showInformationMessage("`Genymotion` path was detected succesfully.");
+					vscode.window.showInformationMessage("Genymotion path has been successfully detected.");
 				} else {
-					vscode.window.showErrorMessage("The detected path for `Genymotion` is not correct.");
+					vscode.window.showErrorMessage("Genymotion path could not be detected or path is not valid.");
 				}
 			});
 		}
@@ -69,9 +69,9 @@ function selectVirtualBoxPath() {
 		if (fileUri && fileUri[0]) {
 			vscode.workspace.getConfiguration("genymotion").update(VIRTUALBOX_FOLDER_CONF, fileUri[0].fsPath, true).then(par => {
 				if (PathHelper.verifyVBoxPath(fileUri[0].fsPath)) {
-					vscode.window.showInformationMessage("`VirtualBox` path was detected succesfully.");
+					vscode.window.showInformationMessage("VirtualBox path has been successfully detected.");
 				} else {
-					vscode.window.showErrorMessage("The detected path for `Virtual Box` is not correct.");
+					vscode.window.showErrorMessage("VirtualBox path could not be detected or path is not valid.");
 				}
 			});
 
@@ -82,7 +82,7 @@ function selectVirtualBoxPath() {
 function detectePathes(): boolean {
 	
 	let statusItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
-	statusItem.text = "~$(loading) Verifying pathes...";
+	statusItem.text = "~$(loading) Verifying paths...";
 	statusItem.show();
 	// Finding pathes
 	let pathes = PathHelper.findPathes(genyPath, vboxPath);
@@ -100,12 +100,12 @@ function detectePathes(): boolean {
 
 	// Checking Genymotion path
 	if (geny === false) {
-		// Show error notification for detecting Genymotion path
+		// Show error notification when detecting Genymotion path
 		vscode.window.showErrorMessage(
-			"Can't detecte `Genymotion` Path.\n Detecte it here or Go to settings and Genymotion session.", ...["Detecte Path", "Dismise"]
+			"Can't detect Genymotion path.\n Verify Genymotion installation or set the path manually.", ...["Set Path", "Cancel"]
 		).then(choice => {
 			// OnDetecte Selected
-			if (choice === "Detecte Path") {
+			if (choice === "Set Path") {
 				selectGenymotionPath();
 			}
 		});
@@ -114,11 +114,11 @@ function detectePathes(): boolean {
 
 	// Checking VBox path
 	if (vbox === false) {
-		// Shwo error notification to detecting Vbox path
+		// Shwo error notification when detecting Vbox path
 		vscode.window.showErrorMessage(
-			"Can't detecte `VirtualBox` Path. Detecte it here or Go to settings and Genymotion session.", ...["Detecte Path", "Dismise"]
+			"Can't detect VirtualBox path.\n Verify VirtualBox installation or set the path manually.", ...["Set Path", "Cancel"]
 		).then(choice => {
-			if (choice === "Detecte Path") {
+			if (choice === "Set Path") {
 				selectVirtualBoxPath();
 			}
 		});
@@ -141,7 +141,7 @@ function commandStart() {
 	}
 	
 	let statusItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
-	statusItem.text = "$(loading~spin) Fetching devicdes...";
+	statusItem.text = "$(loading~spin) Fetching devices...";
 	statusItem.show();
 	let dedMan = new DeviceManager.DeviceManager(genyPath, vboxPath);
 	let devices = dedMan.devicesList();
@@ -182,13 +182,13 @@ function commandSetting() {
 	let items = [
 		{
 			'label': '$(gear) Genymotion Path',
-			'description': 'The path that you installed Genymotion on it',
+			'description': 'Path to Genymotion',
 			'detail': 'Current value:\t' + genyPath,
 			'isGenymotion': true,
 		},
 		{
 			'label': '$(gear) VirtualBox Path',
-			'description': 'The path that you installed VirtualBox on it',
+			'description': 'Path to VirtualBox',
 			'detail': 'Current value:\t' + vboxPath,
 			'isGenymotion': false,
 		},
